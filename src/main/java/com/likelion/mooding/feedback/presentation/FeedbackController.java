@@ -31,7 +31,7 @@ public class FeedbackController {
                                                @RequestBody final FeedbackCreateRequest request) {
         final Long id = feedbackService.createFeedback(guest, request);
         return ResponseEntity.status(HttpStatus.OK)
-                             .location(URI.create("/feedback/status/" + id))
+                             .location(URI.create("/api/feedback/status/" + id))
                              .build();
     }
 

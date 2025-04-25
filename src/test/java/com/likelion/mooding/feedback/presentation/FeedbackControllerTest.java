@@ -68,7 +68,7 @@ public class FeedbackControllerTest {
         final Long id = getIdFromLocationHeader(actualExtract.header("Location"));
 
         assertThat(actualExtract.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualExtract.header("Location")).isEqualTo("/feedback/status/" + id);
+        assertThat(actualExtract.header("Location")).isEqualTo("/api/feedback/status/" + id);
     }
 
     @Nested

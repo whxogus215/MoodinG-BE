@@ -16,7 +16,7 @@ public class E2EClient {
         return RestAssured.given()
                           .log().all()
                           .when()
-                          .post("/session")
+                          .post("/api/session")
                           .then()
                           .log().all()
                           .extract();
@@ -30,7 +30,7 @@ public class E2EClient {
                           .body(request)
                           .log().all()
                           .when()
-                          .post("/feedback")
+                          .post("/api/feedback")
                           .then()
                           .log().all()
                           .extract();
@@ -43,7 +43,7 @@ public class E2EClient {
                           .contentType(MediaType.APPLICATION_JSON_VALUE)
                           .log().all()
                           .when()
-                          .get("/feedback/status/{id}", id)
+                          .get("/api/feedback/status/{id}", id)
                           .then()
                           .log().all()
                           .extract();
@@ -56,7 +56,7 @@ public class E2EClient {
                           .contentType(MediaType.APPLICATION_JSON_VALUE)
                           .log().all()
                           .when()
-                          .get("/feedback/{id}", id)
+                          .get("/api/feedback/{id}", id)
                           .then()
                           .log().all()
                           .extract();
