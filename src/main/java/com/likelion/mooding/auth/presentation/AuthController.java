@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
-    @PostMapping("/session")
+    @PostMapping("/api/session")
     public ResponseEntity<Void> createSession(final HttpServletRequest request) {
         final HttpSession session = request.getSession(true);
         if (session.isNew()) {
