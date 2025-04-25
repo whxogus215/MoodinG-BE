@@ -32,7 +32,7 @@ class AuthControllerTest {
         final ExtractableResponse<Response> extract = RestAssured.given()
                                                                  .log().all()
                                                                  .when()
-                                                                 .post("/session")
+                                                                 .post("/api/session")
                                                                  .then()
                                                                  .log().all()
                                                                  .extract();
@@ -52,7 +52,7 @@ class AuthControllerTest {
         final ExtractableResponse<Response> extract = RestAssured.given()
                                                                  .log().all()
                                                                  .when()
-                                                                 .post("/session")
+                                                                 .post("/api/session")
                                                                  .then()
                                                                  .log().all()
                                                                  .extract();
@@ -62,7 +62,7 @@ class AuthControllerTest {
                                                                        .sessionId(extract.sessionId())
                                                                        .log().all()
                                                                        .when()
-                                                                       .post("/session")
+                                                                       .post("/api/session")
                                                                        .then()
                                                                        .log().all()
                                                                        .extract();
