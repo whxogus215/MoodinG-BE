@@ -49,7 +49,6 @@ class FeedbackServiceTest {
         // when
         final Long feedbackId = feedbackService.createFeedback(new Guest("id"), request);
 
-        // TODO: Thread.sleep 대신 테스트 가능한 방법 찾기
         Thread.sleep(DURATION_FOR_MONO + 500);
 
         // then
