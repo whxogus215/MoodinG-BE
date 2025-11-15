@@ -38,6 +38,8 @@ public class ZstdCompressFilter implements Filter {
         final String header = httpRequest.getHeader("Accept-Encoding");
         if (header != null && header.contains(ZSTD_CODE)) {
             CompressServletResponseWrapper responseWrapper = new CompressServletResponseWrapper(httpResponse);
+            httpResponse.setHeader("Content-Encoding", ZSTD_CODE);
+
             chain.doFilter(request, responseWrapper);
 
             byte[] originContent = responseWrapper.getByteContent();
@@ -45,8 +47,7 @@ public class ZstdCompressFilter implements Filter {
             try {
                 // 응답 데이터를 꺼내서 Zstd 압축
                 byte[] compressContent = Zstd.compress(originContent);
-                response.getOutputStream().write(compressContent);
-                httpResponse.setHeader("Content-Encoding", ZSTD_CODE);
+                httpResponse.getOutputStream().write(compressContent);
             } catch (Exception e) {
                 logger.error("Zstd 압축 실패, 원본 데이터를 전송합니다.", e);
                 response.getOutputStream().write(originContent);
