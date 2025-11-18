@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 @RestController
 public class CompressDebugController {
@@ -26,9 +27,14 @@ public class CompressDebugController {
     }
 
     @GetMapping("/api/feedback/debug")
-    public ResponseEntity<String> getJson() {
+    public ResponseEntity<StreamingResponseBody> getJson() {
+        StreamingResponseBody stream = outputStream -> {
+            outputStream.write(response.getBytes(StandardCharsets.UTF_8));
+            outputStream.flush();
+        };
+
         return ResponseEntity.ok()
                              .contentType(MediaType.APPLICATION_JSON)
-                             .body(response);
+                             .body(stream);
     }
 }

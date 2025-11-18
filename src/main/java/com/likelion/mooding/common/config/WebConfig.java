@@ -2,7 +2,7 @@ package com.likelion.mooding.common.config;
 
 import com.likelion.mooding.auth.presentation.argumentresolver.GuestArgumentResolver;
 import com.likelion.mooding.auth.presentation.interceptor.GuestInterceptor;
-import com.likelion.mooding.common.compress.ZstdCompressFilter;
+import com.likelion.mooding.common.compress.StreamingZstdCompressFilter;
 import java.util.List;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -26,9 +26,9 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean<ZstdCompressFilter> compressFilter() {
-        FilterRegistrationBean<ZstdCompressFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new ZstdCompressFilter());
+    public FilterRegistrationBean<StreamingZstdCompressFilter> compressFilter() {
+        FilterRegistrationBean<StreamingZstdCompressFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new StreamingZstdCompressFilter());
         filterRegistrationBean.setOrder(1);
         filterRegistrationBean.addUrlPatterns("/api/feedback/*");
         return filterRegistrationBean;
