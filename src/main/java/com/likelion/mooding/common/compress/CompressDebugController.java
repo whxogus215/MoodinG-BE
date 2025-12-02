@@ -18,7 +18,7 @@ public class CompressDebugController {
     private final String response;
 
     public CompressDebugController(final ResourceLoader resourceLoader) {
-        final Resource resource = resourceLoader.getResource("classpath:search-result.json");
+        final Resource resource = resourceLoader.getResource("classpath:search-result-10MB.json");
         try (final InputStream is = resource.getInputStream()) {
             this.response = StreamUtils.copyToString(is, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -28,10 +28,7 @@ public class CompressDebugController {
 
     @GetMapping("/api/feedback/debug")
     public ResponseEntity<StreamingResponseBody> getJson() {
-        StreamingResponseBody stream = outputStream -> {
-            outputStream.write(response.getBytes(StandardCharsets.UTF_8));
-            outputStream.flush();
-        };
+        StreamingResponseBody stream = outputStream -> outputStream.write(response.getBytes(StandardCharsets.UTF_8));
 
         return ResponseEntity.ok()
                              .contentType(MediaType.APPLICATION_JSON)
